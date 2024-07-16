@@ -1,0 +1,47 @@
+name: Enforce Merge and Branch Naming Rules
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:  # This enables manual triggering
+
+jobs:
+  check-rules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check base and head branches for PR to main
+        if: github.event.pull_request.base.ref == 'main'
+        run: |
+          HEAD_BRANCH=$(echo "${GITHUB_HEAD_REF}")
+          if [[ "$HEAD_BRANCH" != "dev" ]]; then
+            echo "Pull requests to main can only come from dev"
+            exit 1
+          fi
+
+      - name: Check branch name for PR to dev
+        if: github.event.pull_request.base.ref == 'dev'
+        run: |
+          HEAD_BRANCH=$(echo "${GITHUB_HEAD_REF}")
+          ALLOWED_PATTERN="^feature\/[a-z0-9._-]+$"
+          if [[ ! $HEAD_BRANCH =~ $ALLOWED_PATTERN ]]; then
+            echo "Branch name '$HEAD_BRANCH' is not allowed. It must match the pattern '$ALLOWED_PATTERN'."
+            exit 1
+          fi
+
+      - name: Check if feature branch is rebased on dev
+        if: github.event.pull_request.base.ref == 'main'
+        run: |
+          git fetch origin dev
+          BASE=$(git merge-base origin/dev HEAD)
+          if [ "$(git rev-parse origin/dev)" != "$BASE" ]; then
+            echo "Feature branch must be rebased on the latest dev"
+            exit 1
+          fi
