@@ -36,12 +36,21 @@ jobs:
             exit 1
           fi
 
-      - name: Check if feature branch is rebased on dev
-        if: github.event.pull_request.base.ref == 'main'
+      - name: Check if feature branch is rebased on latest dev
+        if: github.event.pull_request.base.ref == 'dev' && startsWith(github.head_ref, 'feature/')
         run: |
           git fetch origin dev
           BASE=$(git merge-base origin/dev HEAD)
           if [ "$(git rev-parse origin/dev)" != "$BASE" ]; then
             echo "Feature branch must be rebased on the latest dev"
+            exit 1
+          fi
+
+      - name: Check if PR creator is merging
+        run: |
+          PR_CREATOR=$(jq -r .pull_request.user.login "$GITHUB_EVENT_PATH")
+          TRIGGERING_USER=$(jq -r .sender.login "$GITHUB_EVENT_PATH")
+          if [[ "$PR_CREATOR" != "$TRIGGERING_USER" ]]; then
+            echo "Only the PR creator can merge this pull request."
             exit 1
           fi
