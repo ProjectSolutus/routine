@@ -30,7 +30,7 @@ jobs:
         if: github.event.pull_request.base.ref == 'dev'
         run: |
           HEAD_BRANCH=$(echo "${GITHUB_HEAD_REF}")
-          ALLOWED_PATTERN="^feature\/[a-z0-9._-]+$"
+          ALLOWED_PATTERN="^(feat|fix|docs|refactor|chore|style|test)\/[a-z0-9._-]+$"
           if [[ ! $HEAD_BRANCH =~ $ALLOWED_PATTERN ]]; then
             echo "Branch name '$HEAD_BRANCH' is not allowed. It must match the pattern '$ALLOWED_PATTERN'."
             exit 1
