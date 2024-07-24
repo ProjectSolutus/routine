@@ -18,9 +18,10 @@ class RoutineApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       getPages: AppPages.routes,
-      initialRoute: AppRoutes.START,
+      initialRoute: AppRoutes.start,
       theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }
