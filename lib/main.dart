@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:routine/core/strings.dart';
 import 'package:routine/routes/app_pages.dart';
 import 'package:routine/routes/app_routes.dart';
+import 'package:routine/core/themes/theme.dart';
 
 void main() {
   runApp(const RoutineApp());
@@ -18,6 +19,8 @@ class RoutineApp extends StatelessWidget {
       title: AppStrings.appName,
       getPages: AppPages.routes,
       initialRoute: AppRoutes.START,
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.lightTheme,
     );
   }
 }
