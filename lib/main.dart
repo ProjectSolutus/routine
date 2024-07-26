@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:routine/core/strings.dart';
 import 'package:routine/routes/app_pages.dart';
 import 'package:routine/routes/app_routes.dart';
-import 'package:routine/core/themes/theme.dart';
+
+import 'core/themes/theme.dart'; // Import your themes file
 
 void main() {
-  runApp(const RoutineApp());
-}
-
-class RoutineApp extends StatelessWidget {
-  const RoutineApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
+  runApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: AppStrings.appName,
-      getPages: AppPages.routes,
-      initialRoute: AppRoutes.start,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.system,
-    );
-  }
+      getPages: AppPages.routes,
+      initialRoute: AppRoutes.start,
+    ),
+  );
 }

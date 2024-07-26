@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; // Import flutter_svg
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:routine/core/strings.dart';
 
@@ -12,29 +12,38 @@ class OnboardingController extends GetxController {
     {
       'title': AppStrings.slideOneTitle,
       'subtitle': AppStrings.slideOneSubtitle,
-      'image': 'assets/svgs/1.svg',
+      'lightImage': 'assets/svgs/1.svg',
+      'darkImage': 'assets/svgs/1_dark.svg',
       'description': AppStrings.slideOneDescription,
+      'lightIcon': 'assets/svgs/routine.svg',
+      'darkIcon': 'assets/svgs/routine_dark.svg',
     },
     {
       'title': AppStrings.slideTwoTitle,
       'subtitle': AppStrings.slideTwoSubtitle,
-      'image': 'assets/svgs/2.svg',
+      'lightImage': 'assets/svgs/2.svg',
+      'darkImage': 'assets/svgs/2_dark.svg',
       'description': AppStrings.slideTwoDescription,
-      'icon': 'assets/svgs/task.svg',
+      'lightIcon': 'assets/svgs/task.svg',
+      'darkIcon': 'assets/svgs/task_dark.svg',
     },
     {
       'title': AppStrings.slideThreeTitle,
       'subtitle': AppStrings.slideThreeSubtitle,
-      'image': 'assets/svgs/3.svg',
+      'lightImage': 'assets/svgs/3.svg',
+      'darkImage': 'assets/svgs/3_dark.svg',
       'description': AppStrings.slideThreeDescription,
-      'icon': 'assets/svgs/habit.svg',
+      'lightIcon': 'assets/svgs/habit.svg',
+      'darkIcon': 'assets/svgs/habit_dark.svg',
     },
     {
       'title': AppStrings.slideFourTitle,
       'subtitle': AppStrings.slideFourSubtitle,
-      'image': 'assets/svgs/4.svg',
+      'lightImage': 'assets/svgs/4.svg',
+      'darkImage': 'assets/svgs/4_dark.svg',
       'description': AppStrings.slideFourDescription,
-      'icon': 'assets/svgs/privacy.svg',
+      'lightIcon': 'assets/svgs/privacy.svg',
+      'darkIcon': 'assets/svgs/privacy_dark.svg',
     },
   ];
 
@@ -51,7 +60,7 @@ class OnboardingController extends GetxController {
   void onNextPage() {
     if (currentPage.value < pages.length - 1) {
       pageController.nextPage(
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
       currentPage.value++;
@@ -62,7 +71,7 @@ class OnboardingController extends GetxController {
   void onBackPage() {
     if (currentPage.value > 0) {
       pageController.previousPage(
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOut,
       );
       currentPage.value--;

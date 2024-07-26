@@ -1,24 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import flutter_svg
 
 class OnboardingSlide extends StatelessWidget {
-  final String icon;
+  final String lightIcon;
+  final String darkIcon;
   final String title;
   final String subtitle;
-  final String image; // Use String for SVG path
+  final String lightImage;
+  final String darkImage;
   final String description;
 
   const OnboardingSlide({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.image,
+    required this.lightImage,
+    required this.darkImage,
     required this.description,
-    required this.icon,
+    required this.lightIcon,
+    required this.darkIcon,
   });
+
+  String getIconPath(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    return brightness == Brightness.dark ? darkIcon : lightIcon;
+  }
+
+  String getImagePath(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+    return brightness == Brightness.dark ? darkImage : lightImage;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final titleColor = theme.colorScheme.onBackground;
+    final subTitleColor = theme.colorScheme.onSecondary;
+    final descriptionColor = theme.colorScheme.secondary;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16), // Simplified padding
       child: Column(
@@ -28,40 +47,52 @@ class OnboardingSlide extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SvgPicture.asset(
-                icon,
+                getIconPath(context),
                 width: 36,
                 height: 36,
               ),
               const SizedBox(height: 24), // Space between icon and title
               Text(
                 title,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: GoogleFonts.inter(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: titleColor),
               ),
               const SizedBox(height: 8),
               Text(
                 subtitle,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                style: GoogleFonts.inter(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: subTitleColor),
               ),
             ],
           ),
           const SizedBox(height: 56),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                image,
-                width: 160,
-                height: 160,
-              ),
-              const SizedBox(height: 56),
-              Text(
-                description,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 12),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Center(
+                  child: SvgPicture.asset(
+                    getImagePath(context),
+                    width: 160,
+                    height: 160,
+                  ),
+                ),
+                const SizedBox(height: 56),
+                // Space between image and description
+                Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: descriptionColor),
+                ),
+              ],
+            ),
           ),
         ],
       ),

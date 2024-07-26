@@ -63,3 +63,11 @@ flutter:
     - assets/svgs/privacy.svg
     - assets/svgs/routine.svg
     - assets/svgs/task.svg
+    - assets/svgs/1_dark.svg
+    - assets/svgs/2_dark.svg
+    - assets/svgs/3_dark.svg
+    - assets/svgs/4_dark.svg
+    - assets/svgs/habit_dark.svg
+    - assets/svgs/privacy_dark.svg
+    - assets/svgs/routine_dark.svg
+    - assets/svgs/task_dark.svg

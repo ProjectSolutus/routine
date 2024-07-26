@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:routine/core/colors.dart';
+import '../colors.dart';
 
 class AppThemes {
-  static final ThemeData darkTheme = ThemeData(
-      colorScheme: const ColorScheme(
-        brightness: Brightness.dark,
-        primary: AppColors.darkPrimary,
-        onPrimary: AppColors.darkOnPrimary,
-        secondary: AppColors.darkSecondary,
-        onSecondary: AppColors.darkOnSecondary,
-        error: AppColors.darkError,
-        onError: AppColors.darkOnError,
-        surface: AppColors.darkSurface,
-        onSurface: AppColors.darkOnSurface,
-      ));
-  static final ThemeData lightTheme = ThemeData(
-      colorScheme: const ColorScheme(
-        brightness: Brightness.light,
-        primary: AppColors.lightPrimary,
-        onPrimary: AppColors.lightOnPrimary,
-        secondary: AppColors.lightSecondary,
-        onSecondary: AppColors.lightOnSecondary,
-        error: AppColors.lightError,
-        onError: AppColors.lightOnError,
-        surface: AppColors.lightSurface,
-        onSurface: AppColors.lightOnSurface,
-      ));
+  static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.lightPrimary,
+      secondary: AppColors.lightSecondary,
+      background: AppColors.lightBackground,
+      surface: AppColors.lightSurface,
+      onBackground: AppColors.lightOnBackground,
+      onSurface: AppColors.lightOnSurface,
+      onPrimary: AppColors.lightOnPrimary,
+      onSecondary: AppColors.lightOnSecondary,
+    ),
+    scaffoldBackgroundColor: AppColors.lightBackground,
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    colorScheme: const ColorScheme.dark(
+      primary: AppColors.darkPrimary,
+      secondary: AppColors.darkSecondary,
+      background: AppColors.darkBackground,
+      surface: AppColors.darkSurface,
+      onBackground: AppColors.darkOnBackground,
+      onSurface: AppColors.darkOnSurface,
+      onPrimary: AppColors.darkOnPrimary,
+      onSecondary: AppColors.darkOnSecondary,
+    ),
+    scaffoldBackgroundColor: AppColors.darkBackground,
+  );
 }

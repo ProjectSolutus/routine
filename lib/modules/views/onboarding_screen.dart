@@ -4,8 +4,9 @@ import 'package:routine/core/strings.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/onboarding_slide.dart';
 import '../../core/widgets/progress_bar.dart';
-import '../controllers/onboarding_controller.dart'; // Import the controller
-import '../../routes/app_pages.dart'; // Import the app routes
+import '../controllers/onboarding_controller.dart';
+import '../../routes/app_pages.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingScreen extends StatelessWidget {
   final OnboardingController controller = Get.put(OnboardingController());
@@ -14,6 +15,9 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final skipButtonColor = theme.colorScheme.onSecondary;
+
     return Scaffold(
       body: Obx(() {
         return Stack(
@@ -21,7 +25,6 @@ class OnboardingScreen extends StatelessWidget {
             Column(
               children: [
                 const SizedBox(height: 80.0),
-                // Add space above the progress bar
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ProgressBar(
@@ -29,7 +32,6 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 48),
-                // Space between progress bar and content
                 Expanded(
                   child: PageView.builder(
                     controller: controller.pageController,
@@ -43,9 +45,11 @@ class OnboardingScreen extends StatelessWidget {
                       return OnboardingSlide(
                         title: page['title'],
                         subtitle: page['subtitle'],
-                        image: page['image'],
+                        lightImage: page['lightImage'],
+                        darkImage: page['darkImage'],
                         description: page['description'],
-                        icon: page['icon'],
+                        lightIcon: page['lightIcon'],
+                        darkIcon: page['darkIcon'],
                       );
                     },
                   ),
@@ -60,17 +64,26 @@ class OnboardingScreen extends StatelessWidget {
                         CustomButton(
                           onPressed: controller.onBackPage,
                           text: AppStrings.buttonBack,
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.secondary,
+                          textColor: Theme.of(context).colorScheme.onSecondary,
                         )
                       else
                         const SizedBox.shrink(),
                       CustomButton(
-                        onPressed: controller.onNextPage,
+                        onPressed: () {
+                          if (controller.currentPage.value ==
+                              controller.pages.length - 1) {
+                            Get.toNamed(AppRoutes.homescreen);
+                          } else {
+                            controller.onNextPage();
+                          }
+                        },
                         text: controller.currentPage.value ==
                                 controller.pages.length - 1
                             ? AppStrings.buttonComplete
                             : AppStrings.buttonNext,
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.primary,
+                        textColor: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ],
                   ),
@@ -83,11 +96,12 @@ class OnboardingScreen extends StatelessWidget {
                 right: 16,
                 child: TextButton(
                   onPressed: () => Get.toNamed(AppRoutes.homescreen),
-                  child: const Text(
+                  child: Text(
                     AppStrings.buttonSkip,
-                    style: TextStyle(
+                    style: GoogleFonts.inter(
                       fontSize: 16,
-                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,
+                      color: skipButtonColor,
                     ),
                   ),
                 ),

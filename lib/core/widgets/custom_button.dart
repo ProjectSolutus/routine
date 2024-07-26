@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final Color color;
+  final Color textColor;
   final double borderRadius;
   final EdgeInsetsGeometry textPadding;
 
@@ -12,17 +14,16 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     required this.text,
     required this.color,
-    this.borderRadius = 6.0, // Default border radius
-    this.textPadding = const EdgeInsets.symmetric(
-        horizontal: 56, vertical: 8), // Default text padding
+    this.borderRadius = 6.0,
+    this.textPadding = const EdgeInsets.symmetric(horizontal: 56, vertical: 8),
+    required this.textColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(
-        maxWidth:
-        double.infinity, // Ensures button doesn't overflow horizontally
+        maxWidth: double.infinity,
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -33,13 +34,15 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           minimumSize: Size.zero,
-          // Ensures button size is based on content
-          tapTargetSize:
-          MaterialTapTargetSize.shrinkWrap, // Adjusts tap target size
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 12),
+          style: GoogleFonts.inter(
+            fontSize: 12,
+            color: textColor,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

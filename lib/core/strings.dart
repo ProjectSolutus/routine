@@ -2,7 +2,7 @@ class AppStrings {
   static const String appName = "Routine: habit tracker";
 
   //Onboarding Slide 1
-  static const String slideOneTitle = "Routine";
+  static const String slideOneTitle = "Welcome to Routine";
   static const String slideOneSubtitle = "Enabling control.";
   static const String slideOneDescription =
       "Routine makes life management elegant. It's free, open-source, and privacy-first. Enjoy seamless task and habit tracking. Take charge and transform your daily routine.";
