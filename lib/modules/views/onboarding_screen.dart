@@ -18,7 +18,7 @@ class OnboardingScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Get.toNamed(AppRoutes.HOME_SCREEN);
+                Get.toNamed(AppRoutes.homescreen);
               },
               child: const Text(AppStrings.getStarted),
             ),
