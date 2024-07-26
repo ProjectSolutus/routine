@@ -8,7 +8,7 @@ class AppPages {
   static final List<GetPage<dynamic>> routes = <GetPage<dynamic>>[
     GetPage<OnboardingScreen>(
       name: AppRoutes.start,
-      page: () => const OnboardingScreen(),
+      page: () => OnboardingScreen(),
       preventDuplicates: true,
     ),
     GetPage<HomeScreen>(
