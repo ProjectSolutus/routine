@@ -17,55 +17,60 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final skipButtonColor = theme.colorScheme.onSecondary;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Obx(() {
         return Stack(
           children: [
-            Column(
-              children: [
-                const SizedBox(height: 80.0),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ProgressBar(
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  SizedBox(height: screenHeight * 0.11),
+                  ProgressBar(
                     progress: controller.currentProgress.value,
                   ),
-                ),
-                const SizedBox(height: 48),
-                Expanded(
-                  child: PageView.builder(
-                    controller: controller.pageController,
-                    itemCount: controller.pages.length,
-                    onPageChanged: (int page) {
-                      controller.currentPage.value = page;
-                      controller.updateProgress();
-                    },
-                    itemBuilder: (context, index) {
-                      final page = controller.pages[index];
-                      return OnboardingSlide(
-                        title: page['title'],
-                        subtitle: page['subtitle'],
-                        lightImage: page['lightImage'],
-                        darkImage: page['darkImage'],
-                        description: page['description'],
-                        lightIcon: page['lightIcon'],
-                        darkIcon: page['darkIcon'],
-                      );
-                    },
+                  SizedBox(height: screenHeight * 0.04),
+                  Expanded(
+                    flex: 8,
+                    child: PageView.builder(
+                      controller: controller.pageController,
+                      itemCount: controller.pages.length,
+                      onPageChanged: (int page) {
+                        controller.currentPage.value = page;
+                        controller.updateProgress();
+                      },
+                      itemBuilder: (context, index) {
+                        final page = controller.pages[index];
+                        return Center(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 0.0),
+                            child: OnboardingSlide(
+                              title: page['title'],
+                              subtitle: page['subtitle'],
+                              lightImage: page['lightImage'],
+                              darkImage: page['darkImage'],
+                              description: page['description'],
+                              lightIcon: page['lightIcon'],
+                              darkIcon: page['darkIcon'],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 64),
-                  child: Row(
+                  SizedBox(height: screenHeight * 0.04),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       if (controller.currentPage.value > 0)
                         CustomButton(
                           onPressed: controller.onBackPage,
                           text: AppStrings.buttonBack,
-                          color: Theme.of(context).colorScheme.secondary,
-                          textColor: Theme.of(context).colorScheme.onSecondary,
+                          color: theme.colorScheme.surface,
+                          textColor: theme.colorScheme.onSecondary,
                         )
                       else
                         const SizedBox.shrink(),
@@ -82,18 +87,19 @@ class OnboardingScreen extends StatelessWidget {
                                 controller.pages.length - 1
                             ? AppStrings.buttonComplete
                             : AppStrings.buttonNext,
-                        color: Theme.of(context).colorScheme.primary,
-                        textColor: Theme.of(context).colorScheme.onPrimary,
+                        color: theme.colorScheme.primary,
+                        textColor: theme.colorScheme.onPrimary,
                       ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: screenHeight * 0.11),
+                ],
+              ),
             ),
             if (controller.currentPage.value < controller.pages.length - 1)
               Positioned(
-                top: 16,
-                right: 16,
+                top: screenHeight * 0.06,
+                right: 0,
                 child: TextButton(
                   onPressed: () => Get.toNamed(AppRoutes.homescreen),
                   child: Text(

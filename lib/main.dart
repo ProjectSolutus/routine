@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:routine/routes/app_pages.dart';
 import 'package:routine/routes/app_routes.dart';
 
-import 'core/themes/theme.dart'; // Import your themes file
+import 'core/themes/theme.dart';
 
 void main() {
   runApp(

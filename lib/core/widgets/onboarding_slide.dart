@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import flutter_svg
+import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingSlide extends StatelessWidget {
   final String lightIcon;
@@ -37,61 +37,53 @@ class OnboardingSlide extends StatelessWidget {
     final theme = Theme.of(context);
     final titleColor = theme.colorScheme.onBackground;
     final subTitleColor = theme.colorScheme.onSecondary;
-    final descriptionColor = theme.colorScheme.secondary;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16), // Simplified padding
+    final descriptionColor =
+        theme.colorScheme.onSecondary.withOpacity(0.5); // Set opacity here
+
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(
-                getIconPath(context),
-                width: 36,
-                height: 36,
-              ),
-              const SizedBox(height: 24), // Space between icon and title
-              Text(
-                title,
-                style: GoogleFonts.inter(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: titleColor),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                subtitle,
-                style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: subTitleColor),
-              ),
-            ],
+          SvgPicture.asset(
+            getIconPath(context),
+            width: 36,
+            height: 36,
           ),
-          const SizedBox(height: 56),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Center(
-                  child: SvgPicture.asset(
-                    getImagePath(context),
-                    width: 160,
-                    height: 160,
-                  ),
-                ),
-                const SizedBox(height: 56),
-                // Space between image and description
-                Text(
-                  description,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: descriptionColor),
-                ),
-              ],
+          const SizedBox(height: 24),
+          Text(
+            title,
+            style: GoogleFonts.inter(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: titleColor,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            subtitle,
+            style: GoogleFonts.inter(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: subTitleColor,
+            ),
+          ),
+          const SizedBox(height: 56), // Adjusted space here
+          Center(
+            child: SvgPicture.asset(
+              getImagePath(context),
+              width: 160,
+              height: 160,
+            ),
+          ),
+          const SizedBox(height: 56), // Adjusted space here
+          Text(
+            description,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: descriptionColor,
             ),
           ),
         ],
