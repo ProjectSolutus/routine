@@ -17,6 +17,8 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final skipButtonColor = theme.colorScheme.onSecondary;
+    final nextButtonColor = theme.colorScheme.onSurface;
+    final textColor = theme.colorScheme.surface;
 
     return Scaffold(
       body: Obx(() {
@@ -26,7 +28,7 @@ class OnboardingScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 80.0),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: ProgressBar(
                     progress: controller.currentProgress.value,
                   ),
@@ -56,7 +58,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 64),
+                      const EdgeInsets.only(left: 24, right: 24, bottom: 64),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -82,8 +84,8 @@ class OnboardingScreen extends StatelessWidget {
                                 controller.pages.length - 1
                             ? AppStrings.buttonComplete
                             : AppStrings.buttonNext,
-                        color: Theme.of(context).colorScheme.primary,
-                        textColor: Theme.of(context).colorScheme.onPrimary,
+                        color: nextButtonColor,
+                        textColor: textColor,
                       ),
                     ],
                   ),

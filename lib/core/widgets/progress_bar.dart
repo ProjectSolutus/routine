@@ -7,7 +7,7 @@ class ProgressBar extends StatelessWidget {
   const ProgressBar({
     super.key,
     required this.progress,
-    this.borderRadius = 8.0,
+    this.borderRadius = 10.0,
   });
 
   @override
@@ -19,7 +19,7 @@ class ProgressBar extends StatelessWidget {
       tween: Tween(begin: 0, end: progress),
       duration: const Duration(milliseconds: 300),
       builder: (context, value, _) => SizedBox(
-        height: 6,
+        height: 4,
         width: double.infinity,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),

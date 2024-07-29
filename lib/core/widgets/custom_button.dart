@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
     required this.text,
     required this.color,
     this.borderRadius = 6.0,
-    this.textPadding = const EdgeInsets.symmetric(horizontal: 56, vertical: 8),
+    this.textPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
     required this.textColor,
   });
 

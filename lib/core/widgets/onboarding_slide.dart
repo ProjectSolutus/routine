@@ -35,11 +35,11 @@ class OnboardingSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final titleColor = theme.colorScheme.onBackground;
+    final titleColor = theme.colorScheme.onSurface;
     final subTitleColor = theme.colorScheme.onSecondary;
-    final descriptionColor = theme.colorScheme.secondary;
+    final descriptionColor = theme.colorScheme.onSecondary;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16), // Simplified padding
+      padding: const EdgeInsets.symmetric(horizontal: 24), // Simplified padding
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,18 +54,12 @@ class OnboardingSlide extends StatelessWidget {
               const SizedBox(height: 24), // Space between icon and title
               Text(
                 title,
-                style: GoogleFonts.inter(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: titleColor),
+                style: TextStyle(fontFamily: "Larssiet", fontSize: 24, fontWeight: FontWeight.w500, color: titleColor)
               ),
               const SizedBox(height: 8),
               Text(
                 subtitle,
-                style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: subTitleColor),
+                style: TextStyle(fontFamily: "Larsseit", fontSize: 16, color: subTitleColor)
               ),
             ],
           ),
@@ -86,10 +80,7 @@ class OnboardingSlide extends StatelessWidget {
                 Text(
                   description,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: descriptionColor),
+                  style: TextStyle(fontFamily: "Larsseit", color: descriptionColor),
                 ),
               ],
             ),
