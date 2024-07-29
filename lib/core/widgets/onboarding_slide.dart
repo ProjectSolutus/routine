@@ -40,50 +40,63 @@ class OnboardingSlide extends StatelessWidget {
     final descriptionColor =
         theme.colorScheme.onSecondary.withOpacity(0.5); // Set opacity here
 
-    return SingleChildScrollView(
+    // Get screen height
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return SizedBox(
+      height: screenHeight,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            getIconPath(context),
-            width: 36,
-            height: 36,
-          ),
-          const SizedBox(height: 24),
-          Text(
-            title,
-            style: GoogleFonts.inter(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-              color: titleColor,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: SvgPicture.asset(
+              getIconPath(context),
+              width: 36,
+              height: 36,
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            subtitle,
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: subTitleColor,
-            ),
+          SizedBox(height: 28),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: titleColor,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: GoogleFonts.inter(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: subTitleColor,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 56), // Adjusted space here
+          Spacer(),
           Center(
             child: SvgPicture.asset(
               getImagePath(context),
-              width: 160,
-              height: 160,
+              width: 200,
+              height: 200,
             ),
           ),
-          const SizedBox(height: 56), // Adjusted space here
-          Text(
-            description,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: descriptionColor,
+          Spacer(),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              description,
+              style: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: descriptionColor,
+              ),
             ),
           ),
         ],

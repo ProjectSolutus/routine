@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:routine/core/strings.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/onboarding_slide.dart';
 import '../../core/widgets/progress_bar.dart';
 import '../controllers/onboarding_controller.dart';
 import '../../routes/app_pages.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../core/strings.dart';
 
 class OnboardingScreen extends StatelessWidget {
   final OnboardingController controller = Get.put(OnboardingController());
@@ -24,16 +25,15 @@ class OnboardingScreen extends StatelessWidget {
         return Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  SizedBox(height: screenHeight * 0.11),
+                  SizedBox(height: screenHeight * 0.12), // Space above ProgressBar
                   ProgressBar(
                     progress: controller.currentProgress.value,
                   ),
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: screenHeight * 0.05), // Space between ProgressBar and PageView
                   Expanded(
-                    flex: 8,
                     child: PageView.builder(
                       controller: controller.pageController,
                       itemCount: controller.pages.length,
@@ -43,25 +43,22 @@ class OnboardingScreen extends StatelessWidget {
                       },
                       itemBuilder: (context, index) {
                         final page = controller.pages[index];
-                        return Center(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 0.0),
-                            child: OnboardingSlide(
-                              title: page['title'],
-                              subtitle: page['subtitle'],
-                              lightImage: page['lightImage'],
-                              darkImage: page['darkImage'],
-                              description: page['description'],
-                              lightIcon: page['lightIcon'],
-                              darkIcon: page['darkIcon'],
-                            ),
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                          child: OnboardingSlide(
+                            title: page['title'],
+                            subtitle: page['subtitle'],
+                            lightImage: page['lightImage'],
+                            darkImage: page['darkImage'],
+                            description: page['description'],
+                            lightIcon: page['lightIcon'],
+                            darkIcon: page['darkIcon'],
                           ),
                         );
                       },
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: screenHeight * 0.1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -84,7 +81,7 @@ class OnboardingScreen extends StatelessWidget {
                           }
                         },
                         text: controller.currentPage.value ==
-                                controller.pages.length - 1
+                            controller.pages.length - 1
                             ? AppStrings.buttonComplete
                             : AppStrings.buttonNext,
                         color: theme.colorScheme.primary,
@@ -92,7 +89,7 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: screenHeight * 0.11),
+                  SizedBox(height: screenHeight * 0.1), // Space below buttons
                 ],
               ),
             ),
