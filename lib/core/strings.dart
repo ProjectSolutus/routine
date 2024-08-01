@@ -29,5 +29,11 @@ class AppStrings {
   static const String buttonNext = "Next";
   static const String buttonBack = "Back";
   static const String buttonSkip = "Skip";
-  static const String buttonComplete = "Let's Go";
+  static const String buttonComplete = "Finish";
+
+  //Name Screen
+  static const String name = "Name";
+  static const String nameHint = "Enter your name";
+  static const String nameDescription =
+      "Please enter your name to personalize your home screen experience.";
 }

@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/widgets/custom_button.dart';
-import '../../core/widgets/onboarding_slide.dart';
+import '../../core/widgets/onboarding_page.dart';
 import '../../core/widgets/progress_bar.dart';
 import '../controllers/onboarding_controller.dart';
-import '../../routes/app_pages.dart';
+import '../../routes/app_routes.dart';
 import '../../core/strings.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -28,11 +28,11 @@ class OnboardingScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
-                  SizedBox(height: screenHeight * 0.12), // Space above ProgressBar
+                  SizedBox(height: screenHeight * 0.12),
                   ProgressBar(
                     progress: controller.currentProgress.value,
                   ),
-                  SizedBox(height: screenHeight * 0.05), // Space between ProgressBar and PageView
+                  SizedBox(height: screenHeight * 0.06),
                   Expanded(
                     child: PageView.builder(
                       controller: controller.pageController,
@@ -45,7 +45,7 @@ class OnboardingScreen extends StatelessWidget {
                         final page = controller.pages[index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                          child: OnboardingSlide(
+                          child: OnboardingPage(
                             title: page['title'],
                             subtitle: page['subtitle'],
                             lightImage: page['lightImage'],
@@ -58,7 +58,7 @@ class OnboardingScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.1),
+                  SizedBox(height: screenHeight * 0.15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -75,21 +75,21 @@ class OnboardingScreen extends StatelessWidget {
                         onPressed: () {
                           if (controller.currentPage.value ==
                               controller.pages.length - 1) {
-                            Get.toNamed(AppRoutes.homescreen);
+                            Get.toNamed(AppRoutes.namescreen);
                           } else {
                             controller.onNextPage();
                           }
                         },
                         text: controller.currentPage.value ==
-                            controller.pages.length - 1
-                            ? AppStrings.buttonComplete
+                                controller.pages.length - 1
+                            ? AppStrings.buttonNext
                             : AppStrings.buttonNext,
                         color: theme.colorScheme.primary,
                         textColor: theme.colorScheme.onPrimary,
                       ),
                     ],
                   ),
-                  SizedBox(height: screenHeight * 0.1), // Space below buttons
+                  SizedBox(height: screenHeight * 0.05), // Space below buttons
                 ],
               ),
             ),
@@ -98,7 +98,7 @@ class OnboardingScreen extends StatelessWidget {
                 top: screenHeight * 0.06,
                 right: 0,
                 child: TextButton(
-                  onPressed: () => Get.toNamed(AppRoutes.homescreen),
+                  onPressed: () => Get.toNamed(AppRoutes.namescreen),
                   child: Text(
                     AppStrings.buttonSkip,
                     style: GoogleFonts.inter(

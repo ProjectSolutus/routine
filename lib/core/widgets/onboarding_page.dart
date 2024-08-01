@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OnboardingSlide extends StatelessWidget {
+class OnboardingPage extends StatelessWidget {
   final String lightIcon;
   final String darkIcon;
   final String title;
@@ -11,7 +11,7 @@ class OnboardingSlide extends StatelessWidget {
   final String darkImage;
   final String description;
 
-  const OnboardingSlide({
+  const OnboardingPage({
     super.key,
     required this.title,
     required this.subtitle,
@@ -57,7 +57,7 @@ class OnboardingSlide extends StatelessWidget {
               height: 36,
             ),
           ),
-          SizedBox(height: 28),
+          const SizedBox(height: 28),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -79,7 +79,7 @@ class OnboardingSlide extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Center(
             child: SvgPicture.asset(
               getImagePath(context),
@@ -87,13 +87,13 @@ class OnboardingSlide extends StatelessWidget {
               height: 200,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
               description,
               style: GoogleFonts.inter(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: descriptionColor,
               ),

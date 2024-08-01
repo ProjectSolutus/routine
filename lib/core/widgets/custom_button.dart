@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed; // Nullable
   final String text;
   final Color color;
   final Color textColor;
@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton({
     super.key,
-    required this.onPressed,
+    this.onPressed, // Nullable
     required this.text,
     required this.color,
     this.borderRadius = 6.0,
@@ -28,7 +28,8 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: color,
+          backgroundColor: onPressed == null ? color.withOpacity(0.5) : color,
+          // Faded color if disabled
           padding: textPadding,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),

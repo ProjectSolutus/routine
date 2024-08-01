@@ -59,6 +59,7 @@ flutter:
     - assets/svgs/2.svg
     - assets/svgs/3.svg
     - assets/svgs/4.svg
+    - assets/svgs/5.svg
     - assets/svgs/habit.svg
     - assets/svgs/privacy.svg
     - assets/svgs/routine.svg
@@ -67,6 +68,7 @@ flutter:
     - assets/svgs/2_dark.svg
     - assets/svgs/3_dark.svg
     - assets/svgs/4_dark.svg
+    - assets/svgs/5_dark.svg
     - assets/svgs/habit_dark.svg
     - assets/svgs/privacy_dark.svg
     - assets/svgs/routine_dark.svg
