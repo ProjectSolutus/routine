@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:routine/modules/views/home_screen.dart';
 import '../modules/views/name_screen.dart';
 import '../modules/views/onboarding_screen.dart';
 import 'app_routes.dart';
@@ -13,6 +14,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.namescreen,
       page: () => const NameScreen(),
+      preventDuplicates: true,
+    ),
+    GetPage(
+      name: AppRoutes.homescreen,
+      page: () => const HomeScreen(),
       preventDuplicates: true,
     ),
   ];

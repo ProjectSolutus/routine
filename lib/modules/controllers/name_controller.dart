@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class NameController extends GetxController {
   final TextEditingController nameController = TextEditingController();
-  final RxBool isButtonEnabled = false.obs; // Add this line
+  final RxBool isButtonEnabled = false.obs;
 
   @override
   void onInit() {
