@@ -18,6 +18,11 @@ class EditNameBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    // Local variable to hold the temporary new name
+    TextEditingController localController = TextEditingController(
+      text: nameController.nameController.text,
+    );
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -34,7 +39,7 @@ class EditNameBottomSheet extends StatelessWidget {
             child: Text(
               AppStrings.editname,
               style:
-                  GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600),
+              GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600),
             ),
           ),
           const SizedBox(
@@ -43,32 +48,31 @@ class EditNameBottomSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Obx(() => TextField(
-                  style: GoogleFonts.inter(
-                    color: theme.colorScheme.onBackground,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  controller: nameController.nameController,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 10.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(
-                          color: theme.colorScheme.secondary, width: 1.5),
-                    ),
-                    hintText: AppStrings.editHint,
-                    hintStyle: GoogleFonts.inter(
-                        color: theme.colorScheme.onSecondary.withOpacity(0.5)),
-                    errorText: nameController.errorText.value.isEmpty
-                        ? null
-                        : nameController.errorText.value,
-                  ),
-                  onChanged: (value) {
-                    nameController.nameController.text = value;
-                    nameController.validateInput();
-                  },
-                )),
+              style: GoogleFonts.inter(
+                color: theme.colorScheme.onBackground,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              controller: localController,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 10.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  borderSide: BorderSide(
+                      color: theme.colorScheme.secondary, width: 1.5),
+                ),
+                hintText: AppStrings.editHint,
+                hintStyle: GoogleFonts.inter(
+                    color: theme.colorScheme.onSecondary.withOpacity(0.5)),
+                errorText: nameController.errorText.value.isEmpty
+                    ? null
+                    : nameController.errorText.value,
+              ),
+              onChanged: (value) {
+                // Temporary changes will not update NameController state
+              },
+            )),
           ),
           const SizedBox(
             height: 56,
@@ -97,7 +101,7 @@ class EditNameBottomSheet extends StatelessWidget {
                   textColor: theme.colorScheme.onBackground,
                   onPressed: () {
                     if (nameController.isInputValid.value) {
-                      String newName = nameController.nameController.text;
+                      String newName = localController.text;
                       nameController.updateName(newName);
                       todayController.username.value = newName;
                       Navigator.pop(context);
