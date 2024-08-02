@@ -13,12 +13,12 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.namescreen,
-      page: () => const NameScreen(),
+      page: () => NameScreen(),
       preventDuplicates: true,
     ),
     GetPage(
       name: AppRoutes.homescreen,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
       preventDuplicates: true,
     ),
   ];

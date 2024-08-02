@@ -6,10 +6,13 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final Color fillColor;
   final Color borderColor;
-  final Color focusedborderColor;
-  final Color enabledborderColor;
+  final Color focusedBorderColor;
+  final Color enabledBorderColor;
   final Color textColor;
   final Color hintTextColor;
+  final String? errorText;
+  final bool isInputValid;
+  final Color errorBorderColor;
 
   const CustomTextField({
     super.key,
@@ -17,14 +20,27 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.fillColor,
     required this.borderColor,
-    required this.focusedborderColor,
-    required this.enabledborderColor,
+    required this.focusedBorderColor,
+    required this.enabledBorderColor,
     required this.textColor,
     required this.hintTextColor,
+    this.errorText,
+    required this.isInputValid,
+    required this.errorBorderColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    Color getBorderColor() {
+      if (errorText != null && errorText!.isNotEmpty) {
+        return errorBorderColor;
+      } else if (isInputValid) {
+        return focusedBorderColor;
+      } else {
+        return enabledBorderColor;
+      }
+    }
+
     return TextField(
       controller: controller,
       style: GoogleFonts.inter(
@@ -38,19 +54,20 @@ class CustomTextField extends StatelessWidget {
         filled: true,
         fillColor: fillColor,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: borderColor, width: 1.5),
+          borderSide: BorderSide(color: getBorderColor(), width: 1.5),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: enabledborderColor, width: 1.5),
+          borderSide: BorderSide(color: getBorderColor(), width: 1.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: focusedborderColor, width: 1.5),
+          borderSide: BorderSide(color: focusedBorderColor, width: 1.5),
         ),
+        errorText: errorText,
       ),
     );
   }

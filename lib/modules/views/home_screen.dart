@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:routine/modules/views/habit_screen.dart';
 import 'package:routine/modules/views/task_screen.dart';
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final List<Widget> _screens = [
     const TodayScreen(),
@@ -33,29 +35,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      endDrawer: const CustomDrawer(),
-      body: Builder(
-        builder: (context) => Stack(
-          children: [
-            _screens[_selectedIndex],
-            Container(
-              height: 72,
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.menu_outlined,
-                        color: theme.colorScheme.onBackground),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-                ],
-              ),
+      key: _scaffoldKey, // Assign the GlobalKey here
+      endDrawer: CustomDrawer(),
+      body: Stack(
+        children: [
+          _screens[_selectedIndex],
+          Positioned(
+            top: 54,
+            right: 0,
+            child: IconButton(
+              icon: Icon(CupertinoIcons.ellipsis_vertical,
+                  color: theme.colorScheme.onBackground),
+              onPressed: () {
+                _scaffoldKey.currentState
+                    ?.openEndDrawer(); // Use the GlobalKey to open the drawer
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: SizedBox(
         height: 64.0, // Adjust the height here to match the desired look
