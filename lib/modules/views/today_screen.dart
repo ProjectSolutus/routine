@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart'; // Updated import
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:routine/core/strings.dart';
 
 import '../controllers/today_controller.dart';
 
-class TodayScreen extends StatefulWidget {
+class TodayScreen extends StatelessWidget {
   const TodayScreen({super.key});
 
   @override
-  State<TodayScreen> createState() => _TodayScreenState();
-}
-
-class _TodayScreenState extends State<TodayScreen> {
-  final TodayController controller = Get.put(TodayController());
-
-  @override
   Widget build(BuildContext context) {
-    RxString name = controller.username;
-    final theme = Theme.of(context);
-    final isDarkMode = theme.brightness == Brightness.dark;
-    final String logoPath =
-        isDarkMode ? 'assets/svgs/5.svg' : 'assets/svgs/5_dark.svg';
+    final TodayController controller = Get.put(TodayController());
+
     return Scaffold(
-      body: Builder(
-        builder: (context) => Column(
+      body: Obx(() {
+        RxString name = controller.username;
+        final theme = Theme.of(context);
+        final isDarkMode = theme.brightness == Brightness.dark;
+        final String logoPath =
+        isDarkMode ? 'assets/svgs/5.svg' : 'assets/svgs/5_dark.svg';
+
+        return Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 54, left: 16, right: 16),
@@ -63,7 +59,7 @@ class _TodayScreenState extends State<TodayScreen> {
                               ),
                             ),
                             Text(
-                              'Today',
+                              AppStrings.today,
                               style: GoogleFonts.inter(
                                 color: theme.colorScheme.onSecondary,
                                 fontSize: 12,
@@ -79,8 +75,8 @@ class _TodayScreenState extends State<TodayScreen> {
               ),
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }

@@ -1,19 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:routine/core/strings.dart';
 import '../../modules/controllers/today_controller.dart';
+import '../../modules/controllers/name_controller.dart';
+import '../widgets/edit_name_bottom_sheet.dart'; // Import the new file
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({super.key});
 
-  final TodayController controller = Get.put(TodayController());
+  final TodayController todayController = Get.put(TodayController());
+  final NameController nameController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    RxString name = controller.username;
+    RxString name = todayController.username;
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
     final String logoPath =
@@ -23,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Container(
-        color: theme.colorScheme.background, // Background color
+        color: theme.colorScheme.background,
         child: Column(
           children: <Widget>[
             Container(
@@ -63,12 +66,19 @@ class CustomDrawer extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // Handle the edit icon tap here
+                                    // Show the custom bottom sheet to edit the name
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (context) {
+                                        return EditNameBottomSheet();
+                                      },
+                                    );
                                   },
                                   child: Icon(
                                     Icons.edit,
@@ -79,7 +89,7 @@ class CustomDrawer extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              'Today',
+                              AppStrings.menu,
                               style: GoogleFonts.inter(
                                 color: theme.colorScheme.onSecondary,
                                 fontSize: 12,

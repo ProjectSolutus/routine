@@ -36,4 +36,14 @@ class AppStrings {
   static const String nameHint = "Enter your name";
   static const String nameDescription =
       "Please enter your name to personalize your home screen experience.";
+
+//Today Screen
+  static const String today = "Today";
+  static const String menu = "Menu";
+
+  //Today Screen
+  static const String editname = "Edit Name";
+  static const String editHint = "Edit name here";
+  static const String save = "Save";
+  static const String cancel = "Cancel";
 }
