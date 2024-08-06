@@ -24,10 +24,10 @@ class NameScreenState extends State<NameScreen> {
     final isDarkMode = theme.brightness == Brightness.dark;
     final descriptionColor = theme.colorScheme.onSecondary.withOpacity(0.5);
     final String smileyPath =
-    isDarkMode ? 'assets/svgs/5_dark.svg' : 'assets/svgs/5.svg';
+        isDarkMode ? 'assets/svgs/5_dark.svg' : 'assets/svgs/5.svg';
     final screenHeight = MediaQuery.of(context).size.height;
     final String logoPath =
-    isDarkMode ? 'assets/svgs/routine_dark.svg' : 'assets/svgs/routine.svg';
+        isDarkMode ? 'assets/svgs/routine_dark.svg' : 'assets/svgs/routine.svg';
 
     return Scaffold(
       body: Column(
@@ -63,7 +63,7 @@ class NameScreenState extends State<NameScreen> {
                   ),
                   SizedBox(height: screenHeight * 0.01),
                   Obx(
-                        () => CustomTextField(
+                    () => CustomTextField(
                       controller: controller.nameController,
                       hintText: AppStrings.nameHint,
                       fillColor: Colors.transparent,
@@ -95,14 +95,14 @@ class NameScreenState extends State<NameScreen> {
           ),
           SafeArea(
             child: Obx(
-                  () => Container(
+              () => Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: CustomButton(
                   onPressed: controller.isButtonEnabled.value
                       ? () {
-                    Get.toNamed(AppRoutes.homescreen);
-                  }
+                          Get.toNamed(AppRoutes.homescreen);
+                        }
                       : null,
                   text: AppStrings.buttonComplete,
                   color: controller.isButtonEnabled.value

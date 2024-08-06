@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:routine/core/strings.dart';
 
 class NameController extends GetxController {
   final TextEditingController nameController = TextEditingController();
@@ -24,15 +25,15 @@ class NameController extends GetxController {
       isButtonEnabled.value = false;
       isInputValid.value = false;
     } else if (text.startsWith(' ')) {
-      errorText.value = 'Leading spaces are not allowed.';
+      errorText.value = AppStrings.space;
       isButtonEnabled.value = false;
       isInputValid.value = false;
     } else if (RegExp(r'[0-9]').hasMatch(text)) {
-      errorText.value = 'Numbers are not allowed.';
+      errorText.value = AppStrings.number;
       isButtonEnabled.value = false;
       isInputValid.value = false;
     } else if (RegExp(r'[^a-zA-Z\s]').hasMatch(text)) {
-      errorText.value = 'Symbols are not allowed.';
+      errorText.value = AppStrings.symbol;
       isButtonEnabled.value = false;
       isInputValid.value = false;
     } else {

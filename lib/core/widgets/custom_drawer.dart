@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -71,8 +70,14 @@ class CustomDrawer extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // Show the custom bottom sheet to edit the name
                                     showModalBottomSheet(
+                                      showDragHandle: true,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(
+                                              16), // Change this to your desired radius
+                                        ),
+                                      ),
                                       context: context,
                                       isScrollControlled: true,
                                       builder: (context) {
@@ -83,7 +88,7 @@ class CustomDrawer extends StatelessWidget {
                                   child: Icon(
                                     Icons.edit,
                                     color: theme.colorScheme.primary,
-                                    size: 16,
+                                    size: 24,
                                   ),
                                 ),
                               ],
@@ -92,7 +97,7 @@ class CustomDrawer extends StatelessWidget {
                               AppStrings.menu,
                               style: GoogleFonts.inter(
                                 color: theme.colorScheme.onSecondary,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -102,8 +107,11 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(CupertinoIcons.clear_circled_solid,
-                        color: theme.colorScheme.onSecondary),
+                    icon: Icon(
+                      Icons.close_rounded,
+                      color: theme.colorScheme.onSecondary,
+                      size: 24,
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

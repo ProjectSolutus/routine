@@ -23,6 +23,28 @@ class EditNameBottomSheet extends StatelessWidget {
       text: nameController.nameController.text,
     );
 
+    RxString localErrorText = ''.obs;
+    RxBool localIsInputValid = false.obs;
+
+    void validateLocalInput(String value) {
+      if (value.isEmpty) {
+        localErrorText.value = '';
+        localIsInputValid.value = false;
+      } else if (value.startsWith(' ')) {
+        localErrorText.value = AppStrings.space;
+        localIsInputValid.value = false;
+      } else if (RegExp(r'[0-9]').hasMatch(value)) {
+        localErrorText.value = AppStrings.number;
+        localIsInputValid.value = false;
+      } else if (RegExp(r'[^a-zA-Z\s]').hasMatch(value)) {
+        localErrorText.value = AppStrings.symbol;
+        localIsInputValid.value = false;
+      } else {
+        localErrorText.value = '';
+        localIsInputValid.value = true;
+      }
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -32,15 +54,28 @@ class EditNameBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
-            height: 16,
+            height: 8,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              AppStrings.editname,
-              style:
-              GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w600),
-            ),
+          Row(
+            children: [
+              const SizedBox(
+                width: 16,
+              ),
+              Icon(
+                Icons.edit,
+                color: theme.colorScheme.primary,
+                size: 24,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 8, right: 16, top: 16, bottom: 16),
+                child: Text(
+                  AppStrings.editname,
+                  style: GoogleFonts.inter(
+                      fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 8,
@@ -48,34 +83,34 @@ class EditNameBottomSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Obx(() => TextField(
-              style: GoogleFonts.inter(
-                color: theme.colorScheme.onBackground,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-              controller: localController,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                  borderSide: BorderSide(
-                      color: theme.colorScheme.secondary, width: 1.5),
-                ),
-                hintText: AppStrings.editHint,
-                hintStyle: GoogleFonts.inter(
-                    color: theme.colorScheme.onSecondary.withOpacity(0.5)),
-                errorText: nameController.errorText.value.isEmpty
-                    ? null
-                    : nameController.errorText.value,
-              ),
-              onChanged: (value) {
-                // Temporary changes will not update NameController state
-              },
-            )),
+                  style: GoogleFonts.inter(
+                    color: theme.colorScheme.onBackground,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  controller: localController,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: BorderSide(
+                          color: theme.colorScheme.secondary, width: 1.5),
+                    ),
+                    hintText: AppStrings.editHint,
+                    hintStyle: GoogleFonts.inter(
+                        color: theme.colorScheme.onSecondary.withOpacity(0.5)),
+                    errorText: localErrorText.value.isEmpty
+                        ? null
+                        : localErrorText.value,
+                  ),
+                  onChanged: (value) {
+                    validateLocalInput(value);
+                  },
+                )),
           ),
           const SizedBox(
-            height: 56,
+            height: 48,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -84,7 +119,7 @@ class EditNameBottomSheet extends StatelessWidget {
               children: [
                 CustomButton(
                   textPadding: const EdgeInsets.only(
-                      right: 24, bottom: 6, top: 6, left: 24),
+                      right: 40, bottom: 8, top: 8, left: 40),
                   text: AppStrings.cancel,
                   color: theme.colorScheme.secondary,
                   textColor: theme.colorScheme.onBackground,
@@ -95,12 +130,12 @@ class EditNameBottomSheet extends StatelessWidget {
                 const SizedBox(width: 16),
                 CustomButton(
                   textPadding: const EdgeInsets.only(
-                      right: 32, bottom: 6, top: 6, left: 32),
+                      right: 40, bottom: 8, top: 8, left: 40),
                   text: AppStrings.save,
                   color: theme.colorScheme.primary,
                   textColor: theme.colorScheme.onBackground,
                   onPressed: () {
-                    if (nameController.isInputValid.value) {
+                    if (localIsInputValid.value) {
                       String newName = localController.text;
                       nameController.updateName(newName);
                       todayController.username.value = newName;

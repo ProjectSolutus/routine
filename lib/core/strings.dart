@@ -42,8 +42,13 @@ class AppStrings {
   static const String menu = "Menu";
 
   //Today Screen
-  static const String editname = "Edit Name";
-  static const String editHint = "Edit name here";
-  static const String save = "Save";
+  static const String editname = "Edit Your Name";
+  static const String editHint = "Edit Your Name Here";
+  static const String save = " Save ";
   static const String cancel = "Cancel";
+
+  //errors
+  static const String number = "Please use letters only – no numbers, please!";
+  static const String space = "Make sure your name doesn't start with a space.";
+  static const String symbol = "Skip the symbols – just letters are perfect!";
 }

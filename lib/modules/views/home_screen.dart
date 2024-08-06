@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:routine/modules/views/habit_screen.dart';
-import 'package:routine/modules/views/task_screen.dart';
+import 'package:routine/modules/views/task%20screens/task_screen.dart';
 import 'package:routine/modules/views/time_table_screen.dart';
 import 'package:routine/modules/views/today_screen.dart';
 
@@ -44,8 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
             top: 54,
             right: 0,
             child: IconButton(
-              icon: Icon(CupertinoIcons.ellipsis_vertical,
-                  color: theme.colorScheme.onBackground),
+              icon: Icon(
+                Icons.menu_rounded,
+                color: theme.colorScheme.onBackground,
+                size: 24,
+              ),
               onPressed: () {
                 _scaffoldKey.currentState
                     ?.openEndDrawer(); // Use the GlobalKey to open the drawer
